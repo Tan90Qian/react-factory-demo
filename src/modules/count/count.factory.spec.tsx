@@ -3,7 +3,7 @@ import { globalStores, services } from "src/global";
 
 import { CountStore, CountPresenter } from "./count.model";
 import { CountFactory } from "./count.factory";
-import { BaseSevice, BaseEngine } from "src/services/index";
+import { BaseService, BaseEngine } from "src/services/index";
 
 jest.mock("./count.model");
 
@@ -13,7 +13,7 @@ describe("test CountFactory", () => {
 
   beforeEach(() => {
     countStore = new CountStore();
-    countPresenter = new CountPresenter(new BaseSevice(new BaseEngine()));
+    countPresenter = new CountPresenter(new BaseService(new BaseEngine()));
 
     countFactory = new CountFactory(countStore, countPresenter);
     // countFactory = Factory(CountFactory);

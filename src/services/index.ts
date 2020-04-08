@@ -12,7 +12,7 @@ export class BaseEngine {
 }
 
 @Injectable()
-export class BaseSevice {
+export class BaseService {
   constructor(private engine: BaseEngine) {}
 
   fetch(url?: string) {

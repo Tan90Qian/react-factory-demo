@@ -1,6 +1,6 @@
 import { observable, action, runInAction } from "mobx";
 
-import { BaseSevice } from "src/services";
+import { BaseService } from "src/services";
 import { Injectable } from "src/core/inject";
 
 export class CountStore {
@@ -15,7 +15,7 @@ export class CountStore {
 
 @Injectable()
 export class CountPresenter {
-  constructor(private serice: BaseSevice) {}
+  constructor(private service: BaseService) {}
 
   @action
   setCount(store: CountStore, count: number) {
@@ -24,7 +24,7 @@ export class CountPresenter {
 
   @action
   async fetchCount() {
-    return this.serice.fetch()
+    return this.service.fetch()
   }
 }
 
