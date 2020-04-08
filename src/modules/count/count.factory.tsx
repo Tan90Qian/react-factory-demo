@@ -25,6 +25,7 @@ export class CountFactory extends BaseFactory<GlobalStores, Services> {
 
   @loading()
   async didMount() {
+    // const newCount = await CountPresenter.fetchCount(this.services.baseSevice);
     const newCount = await this.countPresenter.fetchCount();
     this.countPresenter.setCount(this.countStore, newCount);
   }

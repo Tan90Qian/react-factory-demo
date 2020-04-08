@@ -26,6 +26,11 @@ export class CountPresenter {
   async fetchCount() {
     return this.service.fetch()
   }
+
+  @action
+  static async fetchCount(service: BaseService) {
+    return service.fetch()
+  }
 }
 
 export class LoadingStore {
