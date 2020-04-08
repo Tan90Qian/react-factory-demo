@@ -9,7 +9,7 @@ const Adapter = require("enzyme-adapter-react-16");
 
 Enzyme.configure({ adapter: new Adapter() });
 
-window.matchMedia =
+(window as any).matchMedia =
   window.matchMedia ||
   function() {
     return {
