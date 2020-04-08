@@ -3,17 +3,19 @@ import { globalStores, services } from "src/global";
 
 import { CountStore, CountPresenter } from "./count.model";
 import { CountFactory } from "./count.factory";
+import { BaseSevice, BaseEngine } from "src/services/index";
 
 jest.mock("./count.model");
 
 describe("test CountFactory", () => {
   let countFactory: CountFactory;
-  let countStore: CountStore;
+  let countStore: CountStore, countPresenter: CountPresenter;
 
   beforeEach(() => {
     countStore = new CountStore();
+    countPresenter = new CountPresenter(new BaseSevice(new BaseEngine()));
 
-    countFactory = new CountFactory(countStore);
+    countFactory = new CountFactory(countStore, countPresenter);
     // countFactory = Factory(CountFactory);
     countFactory.receive({ globalStores, services });
   });
@@ -30,6 +32,6 @@ describe("test CountFactory", () => {
   test("test onClick api", () => {
     countStore.count = 10;
     countFactory.onClick();
-    expect(CountPresenter.setCount).toHaveBeenCalledWith(countStore, 11);
+    expect(countPresenter.setCount).toHaveBeenCalledWith(countStore, 11);
   });
 });

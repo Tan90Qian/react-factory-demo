@@ -1,6 +1,6 @@
 import { Injectable } from "src/core/inject";
 
-class BaseEngine {
+export class BaseEngine {
   async get(url: string): Promise<number> {
     return new Promise((res, rej) => {
       setTimeout(() => {

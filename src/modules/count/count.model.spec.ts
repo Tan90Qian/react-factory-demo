@@ -4,6 +4,7 @@ import {
   LoadingStore,
   LoadingPresenter
 } from "./count.model";
+import { Factory } from "src/core/inject";
 
 describe("test CountStore", () => {
   test("init test", () => {
@@ -21,12 +22,13 @@ describe("test CountStore", () => {
 
 describe("test CountPresenter", () => {
   let countStore: CountStore;
+  const countPresenter = Factory(CountPresenter);
   beforeEach(() => {
     countStore = new CountStore();
   });
 
   test("test setCount api", () => {
-    CountPresenter.setCount(countStore, 5);
+    countPresenter.setCount(countStore, 5);
     expect(countStore.count).toBe(5);
   });
 });
