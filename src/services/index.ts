@@ -1,8 +1,13 @@
 import { Injectable } from "src/core/inject";
 
 class BaseEngine {
-  get(url: string) {
-    return fetch(url);
+  async get(url: string): Promise<number> {
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(10);
+      }, 2000);
+    });
+    // return fetch(url);
   }
 }
 
@@ -10,7 +15,7 @@ class BaseEngine {
 export class BaseSevice {
   constructor(private engine: BaseEngine) {}
 
-  fetch(url: string) {
-    this.engine.get(url);
+  fetch(url?: string) {
+    return this.engine.get(url);
   }
 }

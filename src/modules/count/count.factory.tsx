@@ -11,23 +11,22 @@ import { GlobalStores, Services } from "src/global";
 
 @Injectable()
 export class CountFactory extends BaseFactory<GlobalStores, Services> {
-  constructor(private countStore: CountStore) {
+  constructor(
+    private countStore: CountStore,
+    private countPresenter: CountPresenter
+  ) {
     super();
     this.didMount = this.didMount.bind(this);
   }
 
-  onClick() {
-    CountPresenter.setCount(this.countStore, this.countStore.count + 1);
-  }
+  onClick = () => {
+    this.countPresenter.setCount(this.countStore, this.countStore.count + 1);
+  };
 
   @loading()
   async didMount() {
-    const newCount:number = await new Promise((res, rej) => {
-      setTimeout(() => {
-        res(10);
-      }, 2000);
-    });
-    CountPresenter.setCount(this.countStore, newCount);
+    const newCount = await this.countPresenter.fetchCount();
+    this.countPresenter.setCount(this.countStore, newCount);
   }
 
   create = () => {

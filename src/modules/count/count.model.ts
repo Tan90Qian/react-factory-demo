@@ -1,5 +1,8 @@
 import { observable, action, runInAction } from "mobx";
 
+import { BaseSevice } from "src/services";
+import { Injectable } from "src/core/inject";
+
 export class CountStore {
   @observable count: number;
 
@@ -10,10 +13,18 @@ export class CountStore {
   }
 }
 
+@Injectable()
 export class CountPresenter {
+  constructor(private serice: BaseSevice) {}
+
   @action
-  static setCount(store: CountStore, count: number) {
+  setCount(store: CountStore, count: number) {
     store.count = count;
+  }
+
+  @action
+  async fetchCount() {
+    return this.serice.fetch()
   }
 }
 
